@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foreigner Life Japan</title>
+<!-- ✅ FIXED: আগে এই লিংকটা ভুল ফরম্যাটে ছিল, ফন্ট লোড হচ্ছিল না -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div class="app">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <div class="logo-box">🌏</div>
+    <div>
+      <div class="logo-txt">ForeignerHelp Japan</div>
+      <div class="logo-sub">留学生・外国人サポート</div>
+    </div>
+  </div>
+  <div class="search-bar-nav">
+    <span style="color:var(--text3);font-size:14px">🔍</span>
+    <input type="text" id="navSearch" data-i18n-placeholder="nav.searchPlaceholder" placeholder="ビザ・JLPT・住まいを検索..." onkeydown="if(event.key==='Enter'){showPage('search');doSearch()}">
+  </div>
+  <div class="nav-right">
+    <button class="lang-btn" onclick="cycleLang()">🌐 <span id="langLabel">日本語</span></button>
+  </div>
+</nav>
+
+<div class="main">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sdb-label" data-i18n="sidebar.mainMenu">メインメニュー</div>
+  <button class="sdb-item active" id="sb-home" onclick="showPage('home')">
+    <div class="sdb-icon si-blue">🏠</div> <span data-i18n="sidebar.home">ホーム</span>
+  </button>
+  <button class="sdb-item" id="sb-search" onclick="showPage('search')">
+    <div class="sdb-icon si-sky">🔍</div> <span data-i18n="sidebar.search">情報を検索</span>
+  </button>
+  <button class="sdb-item" id="sb-ai" onclick="showPage('ai')">
+    <div class="sdb-icon si-purple">🤖</div> <span data-i18n="sidebar.ai">AI相談</span>
+  </button>
+  <button class="sdb-item" id="sb-checklist" onclick="showPage('checklist')">
+    <div class="sdb-icon si-green">✅</div> <span data-i18n="sidebar.checklist">手続きリスト</span>
+  </button>
+  <div class="sdb-label" style="margin-top:8px" data-i18n="sidebar.category">カテゴリ</div>
+  <button class="sdb-item" onclick="showPage('search');filterCat('jlpt')">
+    <div class="sdb-icon si-blue">📚</div> <span data-i18n="sidebar.jlpt">JLPT・語学</span>
+  </button>
+  <button class="sdb-item" onclick="showPage('search');filterCat('visa')">
+    <div class="sdb-icon si-amber">📋</div> <span data-i18n="sidebar.visa">ビザ・在留</span>
+  </button>
+  <button class="sdb-item" onclick="showPage('search');filterCat('life')">
+    <div class="sdb-icon si-green">🏠</div> <span data-i18n="sidebar.life">住まい・生活</span>
+  </button>
+  <button class="sdb-item" onclick="showPage('search');filterCat('job')">
+    <div class="sdb-icon si-purple">💼</div> <span data-i18n="sidebar.job">就職・キャリア</span>
+  </button>
+  <button class="sdb-item" onclick="showPage('search');filterCat('school')">
+    <div class="sdb-icon si-teal">🎓</div> <span data-i18n="sidebar.school">進学・大学</span>
+  </button>
+</aside>
+
+<!-- CONTENT AREA -->
+<main class="content">
+
+<!-- ══ HOME PAGE ══ -->
+<div id="page-home">
+  <div class="hero-banner">
+    <div class="hero-tag" data-i18n="home.heroTag">👋 ようこそ！Welcome！স্বাগতম！</div>
+    <h2 data-i18n="home.heroTitle">日本での生活、一緒に乗り越えよう</h2>
+    <p data-i18n="home.heroDesc">ビザから就職まで — 外国人が直面するすべての課題をサポートします。検索・AI相談・チェックリストがすべて無料。</p>
+  </div>
+
+  <div class="grid3">
+    <div class="stat-card">
+      <div class="stat-ico si-blue">📚</div>
+      <div><div class="stat-lbl" data-i18n="home.statArticles">情報記事</div><div class="stat-val">120+</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-ico si-purple">🤖</div>
+      <div><div class="stat-lbl" data-i18n="home.statAi">AI相談</div><div class="stat-val" data-i18n="home.statAiVal">24時間</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-ico si-green">✅</div>
+      <div><div class="stat-lbl" data-i18n="home.statChecklist">チェックリスト</div><div class="stat-val" data-i18n="home.statChecklistVal">5種類</div></div>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <div class="section-title-sm" data-i18n="home.chooseService">サービスを選ぶ</div>
+  </div>
+
+  <!--
+    ★★★ এখানে হোম পেজের সার্ভিস কার্ড আছে ★★★
+    নতুন কার্ড যোগ করতে চাইলে একটা .svc-card ব্লক কপি করে নিচে পেস্ট করুন
+    আইকন (emoji), নাম, বর্ণনা বদলে দিন
+  -->
+  <div class="svc-grid">
+    <div class="svc-card" onclick="showPage('search');filterCat('jlpt')">
+      <div class="svc-ico si-blue">📚</div>
+      <div class="svc-name" data-i18n="home.svcJlptName">JLPT・日本語</div>
+      <div class="svc-desc" data-i18n="home.svcJlptDesc">N5〜N1の学習ガイド、単語・文法まとめ</div>
+    </div>
+    <div class="svc-card" onclick="showPage('search');filterCat('visa')">
+      <div class="svc-ico" style="background:var(--amber-l);color:var(--amber)">📋</div>
+      <div class="svc-name" data-i18n="home.svcVisaName">ビザ・在留資格</div>
+      <div class="svc-desc" data-i18n="home.svcVisaDesc">更新手続き・必要書類・申請の流れ</div>
+    </div>
+    <div class="svc-card" onclick="showPage('search');filterCat('life')">
+      <div class="svc-ico si-green">🏠</div>
+      <div class="svc-name" data-i18n="home.svcLifeName">住まい・生活</div>
+      <div class="svc-desc" data-i18n="home.svcLifeDesc">部屋探し・銀行・ゴミ出し・マナー</div>
+    </div>
+    <div class="svc-card" onclick="showPage('search');filterCat('job')">
+      <div class="svc-ico si-purple">💼</div>
+      <div class="svc-name" data-i18n="home.svcJobName">就職・キャリア</div>
+      <div class="svc-desc" data-i18n="home.svcJobDesc">履歴書・面接・就労ビザのポイント</div>
+    </div>
+    <div class="svc-card" onclick="showPage('search');filterCat('school')">
+      <div class="svc-ico si-teal">🎓</div>
+      <div class="svc-name" data-i18n="home.svcSchoolName">進学・大学入学</div>
+      <div class="svc-desc" data-i18n="home.svcSchoolDesc">専門学校→大学編入・奨学金情報</div>
+    </div>
+    <div class="svc-card" onclick="showPage('ai')">
+      <div class="svc-ico si-sky">🤖</div>
+      <div class="svc-name" data-i18n="home.svcAiName">AI相談（無料）</div>
+      <div class="svc-desc" data-i18n="home.svcAiDesc">何でも日本語・英語・バングラ語で質問</div>
+    </div>
+  </div>
+  <!-- ★★★ সার্ভিস কার্ড শেষ ★★★ -->
+
+  <div class="card" style="background:var(--blue-l);border-color:#BFDBFE;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:14px;font-weight:800;color:#1E40AF;margin-bottom:4px" data-i18n="home.aiPromoTitle">🤖 AIに何でも聞いてみよう</div>
+      <div style="font-size:12px;color:#3B82F6" data-i18n="home.aiPromoDesc">ビザ・JLPT・住まい・就職 — 日本語でも英語でもバングラ語でもOK</div>
+    </div>
+    <button onclick="showPage('ai')" style="background:var(--blue);color:#fff;border:none;border-radius:var(--r999);padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif" data-i18n="home.aiPromoBtn">相談する →</button>
+  </div>
+</div>
+
+<!-- ══ SEARCH PAGE ══ -->
+<div id="page-search" class="hidden">
+  <div class="page-header">
+    <div class="page-title" data-i18n="search.title">🔍 情報を検索する</div>
+    <div class="page-desc" data-i18n="search.desc">ビザ・JLPT・住まい・就職など、必要な情報をすぐ見つける</div>
+  </div>
+  <div class="search-big">
+    <span style="font-size:18px">🔍</span>
+    <input type="text" id="searchInput" data-i18n-placeholder="search.inputPlaceholder" placeholder="例：在留カード更新、N2文法、部屋の探し方..." oninput="doSearch()">
+    <button class="search-btn" onclick="doSearch()" data-i18n="search.btn">検索</button>
+  </div>
+
+  <!--
+    ★★★ এখানে ক্যাটাগরি ফিল্টার ট্যাগ আছে ★★★
+    নতুন ক্যাটাগরি বানালে (script.js এর checklists এর মতো), এখানে একটা নতুন
+    <button class="tag" onclick="filterCat('নতুনক্যাটাগরি')">emoji নাম</button> যোগ করুন
+  -->
+  <div class="tag-row" id="filterTags">
+    <button class="tag active" onclick="filterCat('all')" data-i18n="search.tagAll">すべて</button>
+    <button class="tag" onclick="filterCat('jlpt')" data-i18n="search.tagJlpt">📚 JLPT・語学</button>
+    <button class="tag" onclick="filterCat('visa')" data-i18n="search.tagVisa">📋 ビザ・在留</button>
+    <button class="tag" onclick="filterCat('life')" data-i18n="search.tagLife">🏠 住まい・生活</button>
+    <button class="tag" onclick="filterCat('job')" data-i18n="search.tagJob">💼 就職・キャリア</button>
+    <button class="tag" onclick="filterCat('school')" data-i18n="search.tagSchool">🎓 進学・大学</button>
+  </div>
+  <!-- আর্টিকেলের রেজাল্ট এখানে script.js থেকে অটোমেটিক লোড হয় -->
+  <div id="searchResults"></div>
+</div>
+
+<!-- ══ AI CHAT PAGE ══ -->
+<div id="page-ai" class="hidden">
+  <div class="page-header">
+    <div class="page-title" data-i18n="ai.title">🤖 AI相談</div>
+    <div class="page-desc" data-i18n="ai.desc">日本語・English・বাংলা — 何でも聞いてください</div>
+  </div>
+  <div class="chat-wrap">
+    <!--
+      ★★★ এখানে চ্যাটের শুরুতে দেখানো সাজেশন বাটন আছে ★★★
+      askSuggestion('...') এর ভেতরের টেক্সট বদলে নতুন প্রশ্নের সাজেশন বানাতে পারেন
+    -->
+    <div class="chat-suggestions" id="chatSuggestions">
+      <button class="cs-btn" onclick="askSuggestion('在留カードの更新方法を教えてください')" data-i18n="ai.sug1">📋 在留カード更新</button>
+      <button class="cs-btn" onclick="askSuggestion('JLPT N2の勉強方法は？')" data-i18n="ai.sug2">📚 N2勉強法</button>
+      <button class="cs-btn" onclick="askSuggestion('日本で部屋を借りるときの注意点は？')" data-i18n="ai.sug3">🏠 部屋の借り方</button>
+      <button class="cs-btn" onclick="askSuggestion('外国人が日本で就職するには？')" data-i18n="ai.sug4">💼 就職の方法</button>
+      <button class="cs-btn" onclick="askSuggestion('専門学校から大学に編入できますか？')" data-i18n="ai.sug5">🎓 大学編入</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg">
+        <div class="msg-avatar av-ai">AI</div>
+        <div class="msg-bubble ai">
+          <p data-i18n="ai.introP1">こんにちは！ForeignerHelp JapanのAIアシスタントです。🌏</p>
+          <p data-i18n="ai.introP2">ビザ、JLPT、住まい、就職、進学など、日本生活に関することなら何でも聞いてください。</p>
+          <p data-i18n="ai.introP3"><b>日本語・English・বাংলা</b> で質問できます！</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:auto">
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" data-i18n-placeholder="ai.inputPlaceholder" placeholder="質問を入力... (例: ビザの更新はいつすればいい？)" onkeydown="if(event.key==='Enter')sendMessage()">
+        <button class="send-btn" onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CHECKLIST PAGE ══ -->
+<div id="page-checklist" class="hidden">
+  <div class="page-header">
+    <div class="page-title" data-i18n="checklist.title">✅ 手続きチェックリスト</div>
+    <div class="page-desc" data-i18n="checklist.desc">やるべきことを一つずつ確認しながら進めよう</div>
+  </div>
+
+  <!--
+    ★★★ এখানে চেকলিস্টের ট্যাব বাটন আছে ★★★
+    script.js এর checklists object এ নতুন ক্যাটাগরি (key) যোগ করলে,
+    এখানে ঠিক একইরকম একটা নতুন বাটন যোগ করতে হবে:
+    <button class="tag" onclick="showChecklist('নতুনkey')">emoji নাম</button>
+  -->
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px" id="clTabs">
+    <button class="tag active" onclick="showChecklist('visa')" data-i18n="checklist.tabVisa">📋 ビザ更新</button>
+    <button class="tag" onclick="showChecklist('arrival')" data-i18n="checklist.tabArrival">✈️ 来日後すぐ</button>
+    <button class="tag" onclick="showChecklist('job')" data-i18n="checklist.tabJob">💼 就職活動</button>
+    <button class="tag" onclick="showChecklist('school')" data-i18n="checklist.tabSchool">🎓 大学編入</button>
+    <button class="tag" onclick="showChecklist('jlpt')" data-i18n="checklist.tabJlpt">📚 JLPT準備</button>
+  </div>
+
+  <!-- চেকলিস্টের আইটেম এখানে script.js থেকে অটোমেটিক লোড হয় -->
+  <div id="checklistContent"></div>
+</div>
+
+</main>
+</div>
+</div>
+
+<!-- ══ ARTICLE DETAIL MODAL ══ -->
+<!-- カードをクリックすると、ここに詳細（単語リストなど）が表示される -->
+<div id="articleModal" class="modal-overlay hidden" onclick="if(event.target===this)closeArticleDetail()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeArticleDetail()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
