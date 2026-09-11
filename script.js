@@ -1190,7 +1190,7 @@ const translations = {
     'search.tagLife': '🏠 Housing / Life',
     'search.tagJob': '💼 Jobs / Career',
     'search.tagSchool': '🎓 University',
-    'ai.title': '🤖 AI Chat',
+    'ai.title': '🤖 AI MSG',
     'ai.desc': 'Japanese, English, Bengali — ask anything',
     'ai.sug1': '📋 Residence card renewal',
     'ai.sug2': '📚 N2 study tips',
